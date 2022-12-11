@@ -2,8 +2,8 @@
 //encabezados obligatorios
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: DELETE");
+header("Access-Control-Allow-Headers: *");
 // incluir archivos de conexion y objetos
 include_once '../configuracion/conexion.php';
 include_once '../objetos/productos.php';
@@ -23,7 +23,7 @@ if($producto->eliminar_producto()){
 }
 else{
     // asignar codigo de respuesta - 503 servicio no disponible
-    http_response_code(503);
+    http_response_code(200);
     // informar al usuario
     echo json_encode(array("message" => "No se puede eliminar el producto."));
 }

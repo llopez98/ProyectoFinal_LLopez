@@ -38,7 +38,7 @@
           </v-dialog>
           <v-dialog v-model="dialogEdit" max-width="750px">
             <ValidationObserver v-slot="{ handleSubmit }" ref="editForm">
-              <v-form @submit.prevent="handleSubmit(submitEdit)">
+              <v-form @submit.prevent="handleSubmit(editItemConfirm)">
                 <v-card>
                   <v-card-title class="text-h5">Editar Producto</v-card-title>
                   <v-container class="px-16 mt-10">
@@ -50,8 +50,8 @@
                           v-slot="{ errors }"
                         >
                           <v-text-field
-                            v-model="itemToEdit.name"
-                            label="Name"
+                            v-model="itemToEdit.nombre"
+                            label="Nombre"
                             placeholder="Name"
                             name="name"
                             filled
@@ -71,8 +71,8 @@
                           v-slot="{ errors }"
                         >
                           <v-text-field
-                            v-model="itemToEdit.productNumber"
-                            label="ProductNumber"
+                            v-model="itemToEdit.numero_producto"
+                            label="Numero del producto"
                             name="productNumber"
                             placeholder="ProductNumber"
                             filled
@@ -91,16 +91,7 @@
                           name="Color"
                           rules="required"
                           v-slot="{ errors }"
-                          ><!--
-                      <v-text-field
-                        v-model="itemToEdit.color"
-                        label="Color"
-                        name="color"
-                        placeholder="Color"
-                        filled
-                        rounded
-                        dense
-                      ></v-text-field>-->
+                          >
                           <v-select
                             :items="colors"
                             v-model="itemToEdit.color"
@@ -124,9 +115,9 @@
                           v-slot="{ errors }"
                         >
                           <v-text-field
-                            v-model="itemToEdit.standardCost"
+                            v-model="itemToEdit.precio_unitario"
                             type="number"
-                            label="StandardCost"
+                            label="Precio Unitario"
                             name="standardCost"
                             placeholder="StandardCost"
                             filled
@@ -145,9 +136,9 @@
                           v-slot="{ errors }"
                         >
                           <v-text-field
-                            v-model="itemToEdit.listPrice"
+                            v-model="itemToEdit.cantidad_inventario"
                             type="number"
-                            label="ListPrice"
+                            label="Cantidad en Inventario"
                             name="listPrice"
                             placeholder="ListPrice"
                             filled
@@ -160,205 +151,6 @@
                         </ValidationProvider>
                       </v-col>
                     </v-row>
-                    <v-row>
-                      <v-col>
-                        <ValidationProvider
-                          name="size"
-                          rules="required"
-                          v-slot="{ errors }"
-                        >
-                          <v-text-field
-                            v-model="itemToEdit.size"
-                            label="Size"
-                            name="size"
-                            placeholder="Size"
-                            filled
-                            rounded
-                            dense
-                          ></v-text-field>
-                          <v-alert v-if="errors[0]" dense outlined type="error">
-                            {{ errors[0] }}
-                          </v-alert>
-                        </ValidationProvider>
-                      </v-col>
-                      <v-col>
-                        <ValidationProvider
-                          name="weight"
-                          rules="required"
-                          v-slot="{ errors }"
-                        >
-                          <v-text-field
-                            v-model="itemToEdit.weight"
-                            type="number"
-                            label="Weight"
-                            name="weight"
-                            placeholder="Weight"
-                            filled
-                            rounded
-                            dense
-                          ></v-text-field>
-                          <v-alert v-if="errors[0]" dense outlined type="error">
-                            {{ errors[0] }}
-                          </v-alert>
-                        </ValidationProvider>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <ValidationProvider
-                          name="productCategoryId"
-                          rules="required"
-                          v-slot="{ errors }"
-                        >
-                          <v-select
-                            :items="categories"
-                            v-model="itemToEdit.productCategoryId"
-                            name="productCategoryId"
-                            label="ProductCategoryId"
-                            item-value="productCategoryId"
-                            item-text="name"
-                            filled
-                            rounded
-                            dense
-                          ></v-select>
-                          <v-alert v-if="errors[0]" dense outlined type="error">
-                            {{ errors[0] }}
-                          </v-alert>
-                        </ValidationProvider>
-                      </v-col>
-                      <v-col>
-                        <ValidationProvider
-                          name="productModelId"
-                          rules="required"
-                          v-slot="{ errors }"
-                        >
-                          <v-text-field
-                            v-model="itemToEdit.productModelId"
-                            label="ProductModelId"
-                            name="productModelId"
-                            placeholder="ProductModelId"
-                            filled
-                            rounded
-                            dense
-                            disabled
-                          ></v-text-field>
-                          <v-alert v-if="errors[0]" dense outlined type="error">
-                            {{ errors[0] }}
-                          </v-alert>
-                        </ValidationProvider>
-                      </v-col>
-                    </v-row>
-                    <ValidationProvider
-                      name="sellStartDate"
-                      rules="required"
-                      v-slot="{ errors }"
-                    >
-                      <v-menu
-                        v-model="menu1"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="itemToEdit.sellStartDate"
-                            label="Sell Start Date"
-                            name="sellStartDate"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          v-model="itemToEdit.sellStartDate"
-                          @input="menu1 = false"
-                        ></v-date-picker>
-                      </v-menu>
-                      <v-alert v-if="errors[0]" dense outlined type="error">
-                        {{ errors[0] }}
-                      </v-alert>
-                    </ValidationProvider>
-                    <ValidationProvider
-                      name="sellEndDate"
-                      rules="required"
-                      v-slot="{ errors }"
-                    >
-                      <v-menu
-                        v-model="menu2"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="itemToEdit.sellEndDate"
-                            label="Sell End Date"
-                            name="sellEndDate"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          v-model="itemToEdit.sellEndDate"
-                          @input="menu2 = false"
-                        ></v-date-picker>
-                      </v-menu>
-                      <v-alert v-if="errors[0]" dense outlined type="error">
-                        {{ errors[0] }}
-                      </v-alert>
-                    </ValidationProvider>
-                    <ValidationProvider
-                      name="discontinuedDate"
-                      rules="required"
-                      v-slot="{ errors }"
-                    >
-                      <v-menu
-                        v-model="menu3"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="itemToEdit.discontinuedDate"
-                            label="Discontinued Date"
-                            name="discontinuedDate"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          v-model="itemToEdit.discontinuedDate"
-                          @input="menu3 = false"
-                        ></v-date-picker>
-                      </v-menu>
-                      <v-alert v-if="errors[0]" dense outlined type="error">
-                        {{ errors[0] }}
-                      </v-alert>
-                    </ValidationProvider>
-                    <!--<v-btn
-                    color="success"
-                    class="mr-4"
-                    :disabled="invalid"
-                    type="submit"
-                  >
-                    Guardar camb
-                  </v-btn>
-
-                  <v-alert v-if="message" border="right" colored-border type="error" elevation="2">
-                Complete todos los campos!
-            </v-alert>-->
                   </v-container>
 
                   <v-card-actions>
@@ -418,20 +210,11 @@ export default {
       menu3: false,
       itemToDel: "",
       itemToEdit: {
-        name: "",
-        productNumber: "",
+        nombre: "",
+        numero_producto: "",
         color: "",
-        standardCost: "",
-        listPrice: "",
-        size: "",
-        weight: "",
-        productCategoryId: "",
-        productModelId: "",
-        sellStartDate: "",
-        sellEndDate: "",
-        discontinuedDate: "",
-        thumbNailPhoto: "",
-        thumbNailPhotoFileName: "",
+        precio_unitario: "",
+        cantidad_inventario: "",
       },
       colors: [
         "Black",
@@ -443,26 +226,19 @@ export default {
         "Silver",
         "Multi",
       ],
-      categories: [
-        {
-          productCategoryId: "",
-        },
-      ],
       search: "",
       headers: [
-        {
+      {
           text: "ID",
           align: "start",
           filterable: false,
-          value: "productId",
+          value: "id",
         },
-        { text: "Nombre", value: "name" },
-        { text: "Número del producto", value: "productNumber" },
-        { text: "ListPrice", value: "listPrice" },
-        { text: "Tamaño", value: "size" },
-        { text: "Peso", value: "weight" },
-        { text: "Categoria del Producto", value: "ProductCategory" },
-        { text: "Foto", value: "thumbNailPhoto" },
+        { text: "Nombre", value: "nombre" },
+        { text: "Número del producto", value: "numero_producto" },
+        { text: "Color", value: "color" },
+        { text: "Precio Unitario", value: "precio_unitario" },
+        { text: "Cantidad en inventario", value: "cantidad_inventario" },
         { text: "Actions", value: "actions", sortable: false },
       ],
       products: [],
@@ -476,7 +252,7 @@ export default {
   methods: {
     async getProducts() {
       const response = await productsService.GetAllProducts();
-      this.products = response.data;
+      this.products = response.data.records;
       this.load = false;
     },
     closeDelete() {
@@ -487,26 +263,20 @@ export default {
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      const response = productsService.DeleteProduct(this.itemToDel);
-      if (response) {
-        this.getProducts();
-      }
+      productsService.DeleteProduct(this.itemToDel);
+      this.getProducts();
       this.dialogDelete = false;
     },
     closeEdit() {
       this.dialogEdit = false;
     },
-    async editItem(item) {
+    editItem(item) {
       this.itemToEdit = item;
-      const response = await productsService.GetProductCategories();
-      this.categories = response.data;
       this.dialogEdit = true;
     },
     editItemConfirm() {
-      const response = productsService.EditProduct(this.itemToEdit);
-      if (response) {
-        this.getProducts();
-      }
+      productsService.EditProduct(this.itemToEdit);
+      this.getProducts();
       this.itemToEdit = {};
       this.dialogEdit = false;
     },
