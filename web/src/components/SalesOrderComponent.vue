@@ -23,7 +23,7 @@
         <v-toolbar flat>
           <v-dialog v-model="dialogDetails" max-width="750px" persistent>
             <div v-if="dialogDetails">
-              <order-details-component :orderId="order.salesOrderId" />
+              <order-details-component :orderId="order.id" />
             </div>
             <v-btn block @click="closeDetails">Ok</v-btn>
           </v-dialog>
@@ -36,7 +36,6 @@
 <script>
 import ordersService from "@/services/orders.service";
 const OrderDetailsComponent = () => import("@/components/OrderDetailsComponent.vue");
-//import OrderDetailsComponent from "@/components/OrderDetailsComponent.vue";
 
 export default {
   name: "SalesOrderComponent",
@@ -52,16 +51,15 @@ export default {
           text: "ID",
           align: "start",
           filterable: false,
-          value: "salesOrderId",
+          value: "id",
         },
-        { text: "Número de revisión", value: "revisionNumber" },
-        { text: "Order Date", value: "orderDate" },
-        { text: "Due Date", value: "dueDate" },
-        { text: "Ship Date", value: "shipDate" },
-        { text: "Estado", value: "status" },
-        { text: "Id del cliente", value: "customerId" },
-        { text: "Ship Method", value: "shipMethod" },
-        { text: "Total", value: "totalDue" },
+        { text: "Id del producto", value: "id_producto" },
+        { text: "Nombre del Cliente", value: "cliente" },
+        { text: "Cantidad del articulo", value: "cantidad" },
+        { text: "Precio", value: "precio" },
+        { text: "ITBMS", value: "itbms" },
+        { text: "Precio Total", value: "precio_total" },
+        { text: "Actions", value: "actions", sortable: false },
       ],
       orders: [],
       order: "",
@@ -71,7 +69,7 @@ export default {
   methods: {
     async getOrders() {
       const response = await ordersService.GetAllOrders();
-      this.orders = response.data;
+      this.orders = response.data.records;
       this.load = false;
     },
     openDetails(item) {

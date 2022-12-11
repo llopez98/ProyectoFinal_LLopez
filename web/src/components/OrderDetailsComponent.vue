@@ -37,13 +37,15 @@ export default {
           text: "ID",
           align: "start",
           filterable: false,
-          value: "salesOrderDetailId",
+          value: "id",
         },
-        { text: "Order Qty", value: "orderQty" },
-        { text: "ID del producto", value: "productId" },
-        { text: "Precio por unidad", value: "unitPrice" },
-        { text: "Descuento", value: "unitPriceDiscount" },
-        { text: "Total", value: "lineTotal" },
+        { text: "Nombre del Producto", value: "nombre" },
+        { text: "Nombre del cliente", value: "cliente" },
+        { text: "Cantidad del producto", value: "cantidad" },
+        { text: "Precio", value: "precio" },
+        { text: "ITBMS", value: "itbms" },
+        { text: "Precio Total", value: "precio_total" },
+        { text: "Actions", value: "actions", sortable: false },
       ],
       orderDetails: [],
     };
@@ -51,7 +53,7 @@ export default {
   methods: {
     async getOrderDetails() {
       const response = await ordersService.GetOrderDetails(this.orderId);
-      this.orderDetails = response.data;
+      this.orderDetails = response.data.records;
       this.load = false;
     },
   },

@@ -33,21 +33,6 @@
       >Modulo de productos</router-link
     >
     <router-link
-      :to="customer"
-      tag="button"
-      class="
-        shadow-lg
-        bg-gray-400
-        text-black
-        hover:bg-gray-300 hover:scale-105
-        decoration-from-font
-        rounded
-        p-2
-        m-1
-      "
-      >Modulo de clientes</router-link
-    >
-    <router-link
       :to="orders"
       tag="button"
       class="
@@ -69,9 +54,9 @@
 export default {
   name: "HomeComponent",
   data: () => ({
-    product: "#/product",
-    customer: "#/customer",
-    orders: "#/orders",
+    product: "/product",
+    customer: "/customer",
+    orders: "/orders",
   }),
   computed: {
     currentUser() {

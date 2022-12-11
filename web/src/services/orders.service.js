@@ -3,7 +3,7 @@ import apiService from "./api.service";
 class OrderService {
   GetAllOrders() {
     return apiService
-      .get("leer", null)
+      .get("proyecto_final_llopez/api/ordenes/leer.php", null)
       .then((response) => {
         return Promise.resolve(response);
       })
@@ -14,11 +14,14 @@ class OrderService {
 
   GetOrderDetails(id) {
     return apiService
-      .post("leer_uno", {
+      .post("proyecto_final_llopez/api/ordenes/leer_uno.php", {
         id: id,
       })
       .then((response) => {
-        return response.data;
+        return Promise.resolve(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 }
