@@ -4,6 +4,7 @@
     header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
+    header("Access-Control-Allow-Headers: *");
 
     include_once '../configuracion/conexion.php';
     include_once '../objetos/usuarios.php';
