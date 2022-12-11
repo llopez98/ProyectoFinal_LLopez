@@ -2,10 +2,10 @@ import apiService from "./api.service";
 
 class AuthService {
   registrar(user) {
-    return apiService.post("proyecto_final_llopez/api/usuario/loguear.php", {
+    return apiService.post("proyecto_final_llopez/api/usuario/registrar.php", {
       nombre: user.nombre,
       contrasena: user.contrasena,
-      tipo: user.tipo,
+      tipo: "user",
     });
   }
 

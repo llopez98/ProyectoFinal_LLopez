@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       user: new User(),
-      message: "",
+      message: false,
       show: false,
     };
   },
