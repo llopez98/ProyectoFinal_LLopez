@@ -1,5 +1,17 @@
 <template>
-  <v-card>
+  <v-card class="mt-4">
+    <h1
+      class="
+        mt-16
+        text-[2.5rem]
+        font-bold
+        leading-[4rem]
+        tracking-tight
+        text-slate-700
+      "
+    >
+      Modulo de productos.
+    </h1>
     <v-card-title>
       <v-text-field
         v-model="search"
@@ -178,14 +190,9 @@
           </v-dialog>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.thumbNailPhoto`]="{ item }">
-        <div class="p-2">
-          <img v-bind:src="'data:image/gif;base64,' + item.thumbNailPhoto" />
-        </div>
-      </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        <v-icon v-if="superUser" small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+        <v-icon v-if="superUser" small @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
   </v-card>
@@ -208,6 +215,7 @@ export default {
       menu1: false,
       menu2: false,
       menu3: false,
+      superUser: false,
       itemToDel: "",
       itemToEdit: {
         nombre: "",
@@ -244,6 +252,11 @@ export default {
       products: [],
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.user[0].tipo;
+    },
+  },
   watch: {
     dialogDelete(val) {
       val || this.closeDelete();
@@ -259,7 +272,7 @@ export default {
       this.dialogDelete = false;
     },
     deleteItem(item) {
-      this.itemToDel = item.productId;
+      this.itemToDel = item.id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
@@ -280,9 +293,15 @@ export default {
       this.itemToEdit = {};
       this.dialogEdit = false;
     },
+    checkUser(){
+      if(this.loggedIn === "superUser"){
+        this.superUser = true;
+      }
+    }
   },
   mounted() {
     this.getProducts();
+    this.checkUser();
   },
 };
 </script>

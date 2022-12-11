@@ -2,7 +2,7 @@
 //encabezados obligatorios
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: DELETE");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: *");
 // incluir archivos de conexion y objetos
 include_once '../configuracion/conexion.php';

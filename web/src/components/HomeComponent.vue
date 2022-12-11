@@ -1,4 +1,5 @@
 <template>
+  <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" height="700" style="border-radius:5em;">
   <div class="text-center">
     <h1
       class="
@@ -12,11 +13,11 @@
     >
       Productividad en el manejo de tu información.
     </h1>
-    <h2 class="mt-3 text-lg leading-relaxed text-slate-400">
+    <h2 class="mt-3 text-lg leading-relaxed text-black">
       Registra, analiza y mantente al pendiente de tus productos, ventas y
       clientes.
     </h2>
-    <p>Empieza a trabajar en uno de los siguientes modulos:</p>
+    <p class="text-black">Empieza a trabajar en uno de los siguientes modulos:</p>
     <router-link
       :to="product"
       tag="button"
@@ -48,6 +49,7 @@
       >Modulo de ordenes de compra</router-link
     >
   </div>
+</v-parallax>
 </template>
 
 <script>
@@ -60,7 +62,7 @@ export default {
   }),
   computed: {
     currentUser() {
-      return this.$store.state.auth.user;
+      return this.$store.state.auth.status.loggedIn;
     },
   },
   methods: {

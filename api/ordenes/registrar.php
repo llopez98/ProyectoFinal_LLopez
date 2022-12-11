@@ -31,13 +31,13 @@
 
         if($orden->registrar_orden()){
             // asignar codigo de respuesta - 201 creado
-            http_response_code(201);
+            http_response_code(200);
             // informar al usuario
             echo json_encode(array("message" => "La orden ha sido creada."));
         }
         else{
             // asignar codigo de respuesta - 503 servicio no disponible
-            http_response_code(503);
+            http_response_code(200);
             // informar al usuario
             echo json_encode(array("message" => "No se puede crear la orden."));
         }
@@ -45,7 +45,7 @@
     // informar al usuario que los datos estan incompletos
     else{
         // asignar codigo de respuesta - 400 solicitud incorrecta
-        http_response_code(400);
+        http_response_code(200);
         // informar al usuario
         echo json_encode(array("message" => "No se puede crear la orden. Los datos
     están incompletos."));

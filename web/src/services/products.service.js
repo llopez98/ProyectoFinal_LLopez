@@ -10,9 +10,10 @@ class ProductService{
     }
 
     DeleteProduct(id){
-        return apiService.delete("proyecto_final_llopez/api/producto/eliminar.php", {
+        return apiService.post("proyecto_final_llopez/api/producto/eliminar.php", {
             id: id
-        }).then(() =>{
+        }).then((response) =>{
+            console.log(response);
             return true;
         }).catch((error)=>{
             console.log(error);
