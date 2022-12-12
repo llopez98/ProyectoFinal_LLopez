@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 03:42:45
+-- Tiempo de generación: 12-12-2022 a las 02:30:48
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -26,7 +26,7 @@ DELIMITER $$
 -- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizar_producto` (IN `param1` INT, IN `param2` VARCHAR(50), IN `param3` VARCHAR(25), IN `param4` VARCHAR(15), IN `param5` DECIMAL(8,2), IN `param6` INT)   BEGIN
-	UPDATE productos SET productos.nombre = param2, productos.numero_producto = param3, productos.color = param4, productos.precio_unitario = param5 WHERE productos.id = param1;
+	UPDATE productos SET productos.nombre = param2, productos.numero_producto = param3, productos.color = param4, productos.precio_unitario = param5, productos.cantidad_inventario = param6 WHERE productos.id = param1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_eliminar_orden` (IN `param1` INT)   BEGIN
@@ -127,8 +127,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `numero_producto`, `color`, `precio_unitario`, `cantidad_inventario`, `created_at`, `updated_at`) VALUES
-(1, 'HL Road Frame - Black, 58', 'FR-R92B-58', 'Black', '1431.50', 9, '2022-12-09 03:14:45', '2022-12-10 02:15:17'),
-(2, 'Sport-100 Helmet, Black', 'HL-U508', 'Black', '34.99', 49, '2022-12-10 01:23:40', '2022-12-10 02:15:17');
+(1, 'HL Road Frame - Black, 58	', 'FR-R92B-58', 'Black', '1431.50', 10, '2022-12-09 03:14:45', '2022-12-11 20:31:20'),
+(2, 'Sport-100 Helmet, Black', 'HL-U508', 'Black', '34.99', 48, '2022-12-10 01:23:40', '2022-12-11 23:00:15');
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `contrasena`, `tipo`, `ultima_sesion`, `created_at`, `updated_at`) VALUES
-(1, 'lueunbii98', 'P@ssword12345', 'user', '2022-12-10 01:01:37', '2022-12-10 00:41:00', '2022-12-10 01:01:37');
+(1, 'lueunbii98@gmail.com', 'P@ssword12345', 'user', '2022-12-12 01:02:21', '2022-12-10 00:41:00', '2022-12-12 01:02:21'),
+(2, 'susan1798@gmail.com', 'P@ssword12345', 'user', NULL, '2022-12-11 19:45:16', '2022-12-11 19:45:16'),
+(4, 'ileiinne17@gmail.com', 'P@ssword12345', 'superUser', '2022-12-12 01:06:02', '2022-12-11 19:54:58', '2022-12-12 01:06:02');
 
 --
 -- Índices para tablas volcadas
@@ -183,19 +185,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
