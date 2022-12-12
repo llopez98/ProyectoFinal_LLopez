@@ -13,11 +13,11 @@
     >
       Productividad en el manejo de tu información.
     </h1>
-    <h2 class="mt-3 text-lg leading-relaxed text-black">
+    <h2 class="mt-3 text-lg leading-relaxed text-black font-bold">
       Registra, analiza y mantente al pendiente de tus productos, ventas y
       clientes.
     </h2>
-    <p class="text-black">Empieza a trabajar en uno de los siguientes modulos:</p>
+    <p class="text-black font-bold">Empieza a trabajar en uno de los siguientes modulos:</p>
     <router-link
       :to="product"
       tag="button"
@@ -25,6 +25,7 @@
         shadow-lg
         bg-gray-400
         text-black
+        font-bold
         hover:bg-gray-300 hover:scale-105
         decoration-from-font
         rounded
@@ -40,6 +41,7 @@
         shadow-lg
         bg-gray-400
         text-black
+        font-bold
         hover:bg-gray-300 hover:scale-105
         decoration-from-font
         rounded
